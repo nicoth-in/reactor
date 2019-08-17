@@ -1,0 +1,16 @@
+[package]
+name = "reactor"
+version = "0.0.1"
+authors = ["Artyom Polyanskiy <35273601+open-epsilon@users.noreply.github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gl = "0.13.0"
+glutin = "0.22.0-alpha1"
+colored = "1.8"
+nalgebra = "0.18"
+glm = "*"
+ggez = "*"
+rand = "0.7.0"
