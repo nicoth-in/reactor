@@ -29,8 +29,10 @@ pub use ggez::nalgebra as na;
 mod params;
 pub use params::*;
 
-pub use rand::prelude::*;
+mod builder;
+pub use builder::*;
 
+pub use rand::prelude::*;
 
 
 #[allow(dead_code)]
@@ -157,7 +159,7 @@ impl Element {
                 // Borders
                 if ((x as f32) - self.left + self.border_width) < self.border_width {
                     // border-left
-                    if (self.border_style == 1.) {
+                    if self.border_style == 1. {
                         if Element::_if_in_dotted(y as usize, dot_step) {
                             pixel_color = self.border_color.clone();
                         }
@@ -167,7 +169,7 @@ impl Element {
                 }
                 if (ex + self.border_width - (x as f32)) < self.border_width {
                     // border-right
-                    if (self.border_style == 1.) {
+                    if self.border_style == 1. {
                         if Element::_if_in_dotted(y as usize, dot_step) {
                             pixel_color = self.border_color.clone();
                         }
@@ -177,7 +179,7 @@ impl Element {
                 }
                 if ((y as f32) - self.top + self.border_width) < self.border_width {
                     // border-top
-                    if (self.border_style == 1.) {
+                    if self.border_style == 1. {
                         if Element::_if_in_dotted(x as usize, dot_step) {
                             pixel_color = self.border_color.clone();
                         }
@@ -187,7 +189,7 @@ impl Element {
                 }
                 if (ey + self.border_width - (y as f32)) < self.border_width {
                     // border-bottom
-                    if (self.border_style == 1.) {
+                    if self.border_style == 1. {
                         if Element::_if_in_dotted(x as usize, dot_step) {
                             pixel_color = self.border_color.clone();
                         }
@@ -224,13 +226,14 @@ impl Element {
         return false
     }
 }
-
+#[allow(dead_code)]
 pub struct TextNode {
     pub content: String,
     pub font: Font,
     pub x: f32,
     pub y: f32,
 }
+#[allow(dead_code)]
 impl TextNode {
     pub fn new(s: String, ctx: &mut Context, x: f32, y: f32) -> TextNode {
 
@@ -248,7 +251,7 @@ impl TextNode {
         TextNode { content: s, font: font, x: x, y: y }
     }
 }
-
+#[allow(dead_code)]
 pub struct Layer {
     pub layout: Vec<u8>,
     pub elements: Vec<Element>,
@@ -257,6 +260,7 @@ pub struct Layer {
     pub h: f32,
     pub need_calc: bool,
 }
+#[allow(dead_code)]
 impl Layer {
     pub fn new(w: f32, h: f32) -> Layer {
         Layer { layout: Vec::new(), elements: Vec::new(), textnodes: Vec::new(), w: w, h: h, need_calc: true, }
@@ -264,8 +268,8 @@ impl Layer {
     pub fn calc(&mut self, w: f32, h: f32) {
         self.w = w;
         self.h = h;
-        if(self.need_calc) {
-            for mut el in &mut self.elements {
+        if self.need_calc {
+            for el in &mut self.elements {
                 el.calc(self.w, self.h);
             }
             self.need_calc = false;
@@ -276,7 +280,7 @@ impl Layer {
         for col in 0..(self.h as usize) {
             for row in 0..(self.w as usize) {
                 let mut color = ColorRGBA::new(0, 0, 0, 0);
-                for mut el in &mut self.elements {
+                for el in &mut self.elements {
                     let m_c = el.draw_pixel(row as f32, col as f32);
                     if m_c.a != 0 {
                         color = m_c;

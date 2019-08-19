@@ -34,11 +34,12 @@ impl MyGame {
         let mut layer1 = Layer::new(0., 0.);
         let mut layer2 = Layer::new(0., 0.);
 
-        let mut el1 = Element::new(10.0, 40.0, 100.0, 200.0);
-        el1.set_background_color(ColorRGBA::new(255, 255, 0, 255));
+        let mut el1 = Element::new(10.0, 10.0, 200.0, 200.0);
+        el1.set_background_color(ColorRGBA::new(255, 0, 0, 255));
 
-        let mut el2 = Element::new(100.0, 10.0, 100.0, 200.0);
+        let mut el2 = Element::new(10.0, 580.0, 200.0, 200.0);
         el2.set_background_color(ColorRGBA::new(255, 255, 0, 255));
+        el2.set_border(2., 1., ColorRGBA::new(255, 0, 0, 255));
 
 
         layer1.elements.push(el1);
@@ -87,10 +88,10 @@ impl EventHandler for MyGame {
         for layer in &mut self.layers {
             for el in &mut layer.elements {
                 if el.is_in(_x, _y) {
-                    println!("{:?}", &mut el.key);
+                    //println!("{:?}", &mut el.key);
                 }
             }
         }
-        
+
     }
 }

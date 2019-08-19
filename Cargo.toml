@@ -14,3 +14,9 @@ nalgebra = "0.18"
 glm = "*"
 ggez = "*"
 rand = "0.7.0"
+
+kernel32-sys = "0.2.1"
+user32-sys = "0.2.0"
+gdi32-sys = "0.2.0"
+
+victoria-dom = "0.1.2"
